@@ -1,7 +1,15 @@
+var song;
+var barra_volumen;
+
 function setup() {
-  // put setup code here
+  createCanvas(200, 200);
+  barra_volumen = createSlider(0, 1, 0, 0.01);
+  song = loadSound("song.mp3", () => {
+    song.play();
+  });
 }
 
 function draw() {
-  // put drawing code here
+  background(0);
+  song.setVolume(barra_volumen.value());
 }
