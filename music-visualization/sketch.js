@@ -43,7 +43,7 @@ function draw() {
   beginShape();
 
   for (var i = 0; i < 360; i++) {
-    var r = map(volHistory[i], 0, 1, 10, width * (7 / 8));
+    var r = map(volHistory[i], 0, 1, width * (1 / 8), width * (7 / 8));
     var x = r * cos(i);
     var y = r * sin(i);
 
