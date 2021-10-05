@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>p5.js example</title>
+  <title>p5.js Music Viz</title>
   <style>
     body {
       padding: 0;
@@ -13,12 +13,27 @@
   </style>
   <script src="../p5.js"></script>
   <script src="../addons/p5.sound.js"></script>
+  <script src="getMeta.js" defer></script>
   <script src="sketch.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
+  
 <body>
+  <h1 class ="title">Visualizador de Amplitud Musical</h1>
+  <br/>
+  <div class="metaDatos">
+    <input type="file" id="input" accept=".mp3, .wav" multiple onchange="getFileName()"/>
+    <div id="cover"></div>
+    <p id="title"></p>
+    <p id="artist"></p>
+    <p id="album"></p>
+  </div>
+  
+
   <main>
   </main>
+
 </body>
 
 </html>

@@ -1,3 +1,4 @@
+//Visualization
 var song;
 var barra_volumen;
 
@@ -5,35 +6,58 @@ var boton_play;
 var amp;
 var volHistory = [];
 
+const songList = [];
+const songNames = ["../music/battle_dragons.mp3", "../music/cinematic_chillhop.mp3", "../music/cinematic_fairy_tale.mp3"];
+let songSelected; 
+
 function preload() {
-  song = loadSound("song.mp3", loaded);
+  
+  songList[0] = loadSound("../music/battle_dragons.mp3");
+  songList[1] = loadSound("../music/cinematic_chillhop.mp3");
+  songList[2] = loadSound("../music/cinematic_fairy_tale.mp3");
+  song = songList[0];
+  loaded()
 }
 
 function setup() {
   createCanvas(600, 600);
   angleMode(DEGREES);
   amp = new p5.Amplitude();
-  song.play();
+  //song.play();
 }
 
 function loaded() {
   barra_volumen = createSlider(0, 1, 0.5, 0.01);
-  boton_play = createButton("stop");
+  boton_play = createButton("play");
   boton_play.mousePressed(togglePlay);
 }
 
 function togglePlay() {
   if (!song.isPlaying()) {
     song.play();
-    boton_play.html("stop");
   } else {
     song.stop();
-    boton_play.html("play");
   }
 }
 
 function draw() {
-  background(0);
+
+  if (song.isPlaying()) {
+    boton_play.html("stop");
+  } else {
+    boton_play.html("play");
+  }
+
+  if (filepath != null && filepath != songSelected){
+    songSelected = filepath;
+    let i = songNames.indexOf(songSelected);
+    if (song.isPlaying()) {
+      togglePlay();
+    }
+    song = songList[i];
+    song.play();
+  }
+  background(amp.getLevel()*300, amp.getLevel()*400, amp.getLevel()*500);
   song.setVolume(barra_volumen.value());
   var vol = amp.getLevel();
   volHistory.push(vol);
@@ -47,7 +71,6 @@ function draw() {
     var x = r * cos(i);
     var y = r * sin(i);
 
-    // var y =
     vertex(x, y);
   }
   endShape();
